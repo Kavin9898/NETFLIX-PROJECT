@@ -19,7 +19,7 @@ resource "aws_launch_template" "web_template" {
 }
 
 # -------autoscaling.tf-autoscaling.tf-------- Application Load Balancer ----------------
-resource "aws_lbautoscaling.tf" "web_alb" { ec2.tf
+resource "aws_lbautoscaling.tf" "web_alb" {
   name               = "web-alb"
   load_balancer_type = "application"
   subnets            = [
@@ -41,3 +41,4 @@ resource "aws_lb_listener" "web_listener" {
   }
 
 }
+
