@@ -3,8 +3,8 @@ resource "aws_db_subnet_group" "db_subnet_group" {
   name = "app-db-subnet-group"
 
   subnet_ids = [
-    aws_subnet.private1.id,
-    aws_subnet.private2.id
+    aws_subnet.PRIVATE_NET_SUBNET.id,
+    aws_subnet.PRIVATE_NET_SUBNET1.id
   ]
 
   tags = {
@@ -15,14 +15,13 @@ resource "aws_db_subnet_group" "db_subnet_group" {
 # ---------------- RDS Security Group ----------------
 resource "aws_security_group" "rds_sg" {
   name   = "rds-security-group"
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.NET_VPC.id
 
-  # Allow MySQL from EC2 Security Group only
   ingress {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.ec2_sg.id]
+    security_groups = [aws_security_group.NET_SG.id]
   }
 
   egress {
@@ -30,10 +29,6 @@ resource "aws_security_group" "rds_sg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "RDS-SG"
   }
 }
 
@@ -54,9 +49,4 @@ resource "aws_db_instance" "app_db" {
 
   publicly_accessible     = false
   skip_final_snapshot     = true
-  multi_az                = false
-
-  tags = {
-    Name = "App-Database"
-  }
 }
