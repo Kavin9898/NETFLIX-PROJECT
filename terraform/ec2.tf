@@ -17,14 +17,3 @@ resource "aws_launch_template" "web_template" {
     }
   }
 }
-
-# -------autoscaling.tf-autoscaling.tf-------- Application Load Balancer ----------------
-resource "aws_lbautoscaling.tf" "web_alb" {
-  name               = "web-alb"
-  load_balancer_type = "application"
-  subnets            = [
-    aws_subnet.PUBLIC_NET_SUBNET.id,
-    aws_subnet.PUBLIC_NET_SUBNET1.id
-  ]
-  security_groups = [aws_security_group.NET_SG.id]
-}
