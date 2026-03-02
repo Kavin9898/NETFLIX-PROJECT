@@ -18,14 +18,6 @@ resource "aws_launch_template" "web_template" {
   }
 }
 
-# ---------------- Target Group ----------------
-resource "aws_lb_target_group" "web_tg" {
-  name     = "web-target-group"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.NET_VPC.id
-}
-
 # -------autoscaling.tf-autoscaling.tf-------- Application Load Balancer ----------------
 resource "aws_lbautoscaling.tf" "web_alb" { ec2.tf
   name               = "web-alb"
@@ -47,4 +39,5 @@ resource "aws_lb_listener" "web_listener" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.web_tg.arn
   }
+
 }
