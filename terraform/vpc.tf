@@ -6,10 +6,6 @@ terraform {
     }
   }
 }
-provider "aws" {
-  region = "var.region"
-}
-
 resource "aws_vpc" "NET_VPC" {
   cidr_block = "192.168.0.0/24"
   tags = {
