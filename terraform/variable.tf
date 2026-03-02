@@ -13,5 +13,6 @@ variable "db_username" {
 }
 
 variable "db_password" {
-  default = "Admin@123"
+  default = "Admin12345"
 }
+
