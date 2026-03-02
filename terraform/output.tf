@@ -10,9 +10,3 @@ output "rds_endpoint" {
   value       = aws_db_instance.app_db.endpoint
   sensitive   = true
 }
-
-# ---------------- CloudFront URL ----------------
-output "cloudfront_url" {
-  description = "CloudFront Distribution URL"
-  value       = aws_cloudfront_distribution.video_cdn.domain_name
-}
